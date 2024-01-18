@@ -199,15 +199,17 @@ code .
 3. Update with demo sources
 
 ```bash
-cp -r $DEMO_DIR/src/components/DemoEntityCard ./src/components
-echo "export { DemoEntityCard } from './components/DemoEntityCard';" >> ./src/index.ts
-echo "export { default as DemoIcon } from '@material-ui/icons/EmojiPeople';" >> ./src/index.ts
-cp $DEMO_DIR/app-config.yaml .
-cp $DEMO_DIR/config.d.ts .
-npm pkg set "configSchema"="config.d.ts"
-npm pkg delete "private"
 yarn add -D react@^17.0.2 react-dom@^17.0.2 react-router-dom@^6.20.0
 yarn add @backstage/plugin-catalog-react @material-ui/icons@4.11.3
+
+cp -r $DEMO_DIR/src/components/DemoEntityCard ./src/components
+cp $DEMO_DIR/app-config.yaml .
+cp $DEMO_DIR/config.d.ts .
+echo "export { DemoEntityCard } from './components/DemoEntityCard';" >> ./src/index.ts
+echo "export { default as DemoIcon } from '@material-ui/icons/EmojiPeople';" >> ./src/index.ts
+
+npm pkg set "configSchema"="config.d.ts"
+npm pkg delete "private"
 ```
 
 4. Set up as dynamic plugin
@@ -218,6 +220,7 @@ This follows steps at [Janus Showcase Dynamic plugins docs](https://github.com/j
 yarn add -D @janus-idp/cli
 npm pkg set "files[1]"="dist-scalprum"
 npm pkg set "scripts.export-dynamic"="janus-cli package export-dynamic-plugin"
+npm pkg set "scripts.postversion"="yarn run export-dynamic"
 ```
 
 5. Build and publish
@@ -260,4 +263,12 @@ Please replace `$NPM_ACCOUNT` with your NPM account name.
                           lg: "span 4"
                           md: "span 6"
                           xs: "span 12"
+```
+
+```yaml
+                      props:
+                        title: Custom title
+                      if:
+                        anyOf:
+                          - isKind: component
 ```

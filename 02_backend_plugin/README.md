@@ -217,6 +217,7 @@ npm pkg set "files[1]"="dist-dynamic/*.*"
 npm pkg set "files[2]"="dist-dynamic/dist/**"
 npm pkg set "files[3]"="dist-dynamic/alpha/*"
 npm pkg set "scripts.export-dynamic"="janus-cli package export-dynamic-plugin"
+npm pkg set "scripts.postversion"="yarn run export-dynamic"
 ```
 
 5. Build and publish
