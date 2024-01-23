@@ -182,7 +182,7 @@ Enablement session for dynamic plugins in Backstage
 
 2. Create a new plugin
 
-First we will create a brand new plugin. Please create a NPM account and log in to it. Set `NPM_ACCOUNT` to this name.
+First we will create a brand new plugin. Please create a NPM account and log in to it. Please open a terminal in this exact folder (`01_frontend_plugin`). Set `NPM_ACCOUNT` to this name.
 
 
 
@@ -256,7 +256,7 @@ Please replace `$NPM_ACCOUNT` with your NPM account name.
                     path: /demo
                 mountPoints:
                   - mountPoint: entity.page.overview/cards
-                    importName: demoEntityCard
+                    importName: DemoEntityCard
                     config:
                       layout:
                         gridColumnEnd:
