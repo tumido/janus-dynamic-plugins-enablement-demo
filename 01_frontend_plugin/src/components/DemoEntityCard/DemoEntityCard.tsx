@@ -4,12 +4,12 @@ import { InfoCard } from '@backstage/core-components';
 import { useEntity } from '@backstage/plugin-catalog-react'
 import { configApiRef, useApi } from '@backstage/core-plugin-api';
 
-export const DemoEntityCard = () => {
+export const DemoEntityCard = ({title}: {title: string}) => {
   const {entity} = useEntity()
   const configApi = useApi(configApiRef);
   const foo = configApi.getOptionalString('testPlugin.foo');
   return (
-    <InfoCard title="Entity name">
+    <InfoCard title={title || "Entity name"}>
       <Typography variant="body1">
         {entity.kind}:{entity.metadata.namespace || "default"}/{entity.metadata.name}
         <br/>

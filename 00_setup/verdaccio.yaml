@@ -1,0 +1,73 @@
+configMap: >
+  # This is the config file used for the docker images
+
+  # It allows all users to do anything, so don't use it on production systems.
+
+  #
+
+  # Do not configure host and port under `listen` in this file
+
+  # as it will be ignored when using docker.
+
+  # see
+  https://github.com/verdaccio/verdaccio/blob/master/docs/docker.md#docker-and-custom-port-configuration
+
+  #
+
+  # Look here for more config file examples:
+
+  # https://github.com/verdaccio/verdaccio/tree/master/conf
+
+  #
+
+
+  # path to a directory with all packages
+
+  storage: /verdaccio/storage/data
+
+
+  web:
+    # WebUI is enabled as default, if you want disable it, just uncomment this line
+    #enable: false
+  auth:
+    htpasswd:
+      # Do not change this path if secrets htpasswd is used.
+      file: /verdaccio/storage/htpasswd
+      # Maximum amount of users allowed to register, defaults to "+infinity".
+      # You can set this to -1 to disable registration.
+      #max_users: 1000
+
+  # a list of other known repositories we can talk to
+
+  uplinks:
+    npmjs:
+      url: https://registry.npmjs.org/
+      agent_options:
+        keepAlive: true
+        maxSockets: 40
+        maxFreeSockets: 10
+      maxage: 1y
+
+  packages:
+    '@rhsummit2024/*':
+      access: $all
+      publish: $authenticated
+    '@*/*':
+      access: $all
+      publish: $authenticated
+      proxy: npmjs
+    '**':
+      access: $all
+      publish: $authenticated
+      proxy: npmjs
+image:
+  repository: verdaccio
+  tag: latest
+ingress:
+  enabled: true
+  hosts:
+    '0': verdaccio-verdaccio.apps-crc.testing
+podAnnotations:
+  alpha.image.policy.openshift.io/resolve-names: '*'
+podSecurityContext: null
+securityContext: null

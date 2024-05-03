@@ -1,0 +1,38 @@
+global:
+  dynamic:
+    plugins:
+      - package: '@rhsummit2024/backstage-plugin-demo@0.1.0'
+        integrity: "" # FIXME: CHANGE ME!
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              rhsummit2024.backstage-plugin-demo:
+                appIcons:
+                  - name: demoIcon
+                    importName: DemoIcon
+                dynamicRoutes:
+                  - importName: DemoPage
+                    menuItem:
+                      icon: demoIcon
+                      text: This is Demo
+                    path: /demo
+                mountPoints:
+                  - mountPoint: entity.page.overview/cards
+                    importName: DemoEntityCard
+                    config:
+                      layout:
+                        gridColumnEnd:
+                          lg: "span 4"
+                          md: "span 6"
+                          xs: "span 12"
+                      props:
+                        title: Custom title
+                      if:
+                        anyOf:
+                          - isKind: component
+
+upstream:
+  backstage:
+    appConfig:
+      testPlugin:
+        foo: This value is read directly from app-config.yaml
