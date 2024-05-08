@@ -1,0 +1,13 @@
+global:
+  dynamic:
+    plugins:
+      - package: '@rhsummit2024/backstage-plugin-demo-backend@0.1.0'
+        integrity: "" # FIXME: CHANGE ME!
+
+upstream:
+  backstage:
+    appConfig:
+      backend:
+        auth:
+          dangerouslyDisableDefaultAuthPolicy: true
+
